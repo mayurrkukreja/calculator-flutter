@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class MyButton extends StatelessWidget {
   final color;
   final textColor;
@@ -15,7 +16,7 @@ class MyButton extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(9),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(50),
+          borderRadius: BorderRadius.circular(20),
           child: Container(
             color: color,
             child: Center(

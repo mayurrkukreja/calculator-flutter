@@ -1,9 +1,15 @@
+import 'package:calculator/admob_service.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:math_expressions/math_expressions.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:calculator/buttons.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  AdmobService.initialize();
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -34,6 +40,7 @@ class Calculator extends StatefulWidget {
 class _CalculatorState extends State<Calculator> {
   var userInput = '';
   var answer = '0';
+  BannerAd? bannerAd;
 
   final List<String> buttons = [
     'C',
@@ -60,17 +67,30 @@ class _CalculatorState extends State<Calculator> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text("Standard Calculator"),
+        elevation: 6,
+        backgroundColor: Colors.black87,
+      ),
+      // bottomNavigationBar: Container(
+      //   height: 50,
+      //   child: AdWidget(
+      //     key: UniqueKey(),
+      //     ad: AdmobService.createBannerAd()..load(),
+      //   ),
+      // ),
       backgroundColor: Colors.white,
       body: Column(
         children: [
           Expanded(
-            flex: 2,
+            flex: 1,
             child: Container(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Container(
-                    padding: EdgeInsets.only(right: 20, top: 70, left: 20),
+                    padding: EdgeInsets.only(right: 10, top: 20, left: 10),
                     alignment: Alignment.centerRight,
                     child: Text(
                       userInput,
@@ -171,6 +191,13 @@ class _CalculatorState extends State<Calculator> {
                   }
                 },
               ),
+            ),
+          ),
+          Container(
+            height: 50,
+            child: AdWidget(
+              // key: UniqueKey(),
+              ad: AdmobService.createBannerAd()..load(),
             ),
           ),
         ],
