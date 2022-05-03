@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:math_expressions/math_expressions.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:calculator/buttons.dart';
 
 void main() => runApp(const MyApp());
 
@@ -195,41 +196,5 @@ class _CalculatorState extends State<Calculator> {
     ContextModel cm = ContextModel();
     double eval = exp.evaluate(EvaluationType.REAL, cm);
     answer = eval.toString();
-  }
-}
-
-class MyButton extends StatelessWidget {
-  final color;
-  final textColor;
-  final String buttonText;
-  final buttonTapped;
-
-  MyButton(
-      {this.color, this.textColor, this.buttonText = '', this.buttonTapped});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: buttonTapped,
-      child: Padding(
-        padding: const EdgeInsets.all(9),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(50),
-          child: Container(
-            color: color,
-            child: Center(
-              child: Text(
-                buttonText,
-                style: TextStyle(
-                  color: textColor,
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
   }
 }
